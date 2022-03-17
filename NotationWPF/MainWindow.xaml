@@ -16,8 +16,8 @@
         <Label Content="Выберите, в какую систему счисления переводить" HorizontalAlignment="Left" Margin="28,159,0,0" VerticalAlignment="Top"/>
         <Label Content="Результат" HorizontalAlignment="Left" Margin="30,217,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnClear" Content="Очистить" HorizontalAlignment="Left" Margin="132,299,0,0" VerticalAlignment="Top" Width="81" Command="{Binding ClearCommand}"/>
-        <TextBox x:Name="txtNotFrom" HorizontalAlignment="Left" Margin="30,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293" Text="{Binding NotationFrom}"/>
-        <TextBox x:Name="txtNotTo" HorizontalAlignment="Left" Margin="29,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="294" Text="{Binding NotationTo}"/>
+        <ComboBox x:Name="cmbNotFrom" HorizontalAlignment="Left" Margin="30,132,0,0" VerticalAlignment="Top" Width="293" ItemsSource="{Binding Notations}" SelectedValue="{Binding NotationFrom}"/>
+        <ComboBox x:Name="cmbNotTo" HorizontalAlignment="Left" Margin="30,195,0,0" VerticalAlignment="Top" Width="293" ItemsSource="{Binding Notations}" SelectedValue="{Binding NotationTo}"/>
 
     </Grid>
 </Window>

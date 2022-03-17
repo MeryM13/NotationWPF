@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System.Windows;
 
 namespace NotationWPF
 {
@@ -12,10 +14,14 @@ namespace NotationWPF
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         private NumberTransition transition;
+        IList<int> notations = new List<int>()
+        { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+            23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 };
 
         public TransitionViewModel()
         {
             transition = new NumberTransition();
+            transition.NotationFrom = transition.NotationTo = 10;
         }
 
         public string NumberFrom
@@ -31,7 +37,13 @@ namespace NotationWPF
             }
         }
 
-        public string NotationFrom
+        public IList<int> Notations
+        {
+            get { return notations; }
+            set { notations = value; }
+        }
+
+        public int NotationFrom
         {
             get { return transition.NotationFrom; }
             set
@@ -44,7 +56,7 @@ namespace NotationWPF
             }
         }
 
-        public string NotationTo
+        public int NotationTo
         {
             get { return transition.NotationTo; }
             set
@@ -77,9 +89,10 @@ namespace NotationWPF
             {
                 return clearCommand ??= new RelayCommand(obj =>
                     {
-                        NumberFrom = NumberTo = NotationFrom = NotationTo = String.Empty;
-                    }, o => !string.IsNullOrEmpty(NumberFrom) || !string.IsNullOrEmpty(NumberTo) 
-                    || !string.IsNullOrEmpty(NotationFrom) || !string.IsNullOrEmpty(NotationTo));
+                        NumberFrom = NumberTo = String.Empty;
+                        NotationFrom = NotationTo = 10;
+                    }, o => !string.IsNullOrEmpty(NumberFrom) || !string.IsNullOrEmpty(NumberTo)
+                    || NotationTo != 10 || NotationFrom != 10);
             }
         }
 
@@ -92,13 +105,13 @@ namespace NotationWPF
                     {
                         try
                         {
-                            NumberTo = NotationLibrary.Calculate.Calc(NumberFrom, Int32.Parse(NotationFrom), Int32.Parse(NotationTo));
+                            NumberTo = NotationLibrary.Calculate.Calc(NumberFrom, NotationFrom, NotationTo);
                         }
                         catch (Exception ex)
                         {
-                            System.Windows.MessageBox.Show(ex.Message);
+                            MessageBox.Show(ex.Message);
                         }
-                    }, o => !string.IsNullOrEmpty(NumberFrom) && !string.IsNullOrEmpty(NotationTo) && !string.IsNullOrEmpty(NotationFrom));
+                    }, o => !string.IsNullOrEmpty(NumberFrom));
             }
         }
 

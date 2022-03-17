@@ -23,7 +23,8 @@ namespace NotationWPF
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new TransitionViewModel();
+            TransitionViewModel vm = new TransitionViewModel();
+            this.DataContext = vm;
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)

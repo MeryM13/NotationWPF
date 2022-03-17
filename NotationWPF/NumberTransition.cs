@@ -9,8 +9,8 @@ namespace NotationWPF
     internal class NumberTransition
     {
         public string NumberFrom { get; set; }
-        public string NotationFrom { get; set; }
-        public string NotationTo { get; set; }
+        public int NotationFrom { get; set; }
+        public int NotationTo { get; set; }
         public string NumberTo { get; set; }
     }
 }
